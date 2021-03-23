@@ -1,0 +1,30 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: secretworld-app-clone
+  labels:
+    tekton.dev/pipeline: secretworld-app-clone
+spec:
+  serviceAccountName: github-bot 
+  pipelineRef:
+    name: cat-branch-readme
+  params:
+  - name: url
+    value: https://github.ibm.com/BusinessAnalytics/ca-sci-base-centos.git
+  - name: revision
+    value: master
+  - name: repo-url
+    value: https://github.ibm.com/BusinessAnalytics/ca-sci-base-centos.git
+  - name: branch-name
+    value: master
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        metadata:
+          name: mypvc
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Mi
