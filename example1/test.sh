@@ -1,14 +1,5 @@
 #!/bin/bash
-# -----------------------------------------------------------------------------
-# IBM Confidential
-# OCO Source Materials
-# IBM Business Platform: sample-service
-# (C) Copyright IBM Corp. 2017, 2018
-#
-# The source code for this program is not published or otherwise divested of
-# its trade secrets, irrespective of what has been deposited with the U.S.
-# Copyright Office.
-# -----------------------------------------------------------------------------
+
 set -e
 
 
@@ -30,7 +21,7 @@ kubectl create secret -n default generic github-pat-secret --dry-run=client -o y
   | kubectl apply -f -
 
 
-kubectl annotate -n default secret github-pat-secret "tekton.dev/git-0=https://github.ibm.com"
+kubectl annotate -n default secret github-pat-secret "tekton.dev/git-0=https://github.com"
 
 
 kubectl get -n default secret github-pat-secret -o yaml
